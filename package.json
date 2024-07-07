@@ -2,25 +2,47 @@
   "name": "ranger-storefront-antd-page",
   "version": "0.1.0",
   "private": true,
+  "config": {
+    "cz-customizable": {
+      "config": "./.cz-config.js"
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rimraf .next node_modules",
+    "preinstall": "npx only-allow pnpm",
+    "husky:prepare": "husky install"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.4"
+    "next": "^14.2.4",
+    "only-allow": "^1.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4"
+    "@ranger-theme/branchlint-config": "^0.1.0",
+    "@ranger-theme/commitizen-config": "^0.1.0",
+    "@ranger-theme/commitlint-config": "^0.4.0",
+    "@ranger-theme/eslint-config": "^0.2.0",
+    "@ranger-theme/prettier-config": "^0.1.0",
+    "@ranger-theme/stylelint-config": "^0.2.1",
+    "@ranger-theme/ts-config": "^0.1.0",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "eslint": "^8.56.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "postcss": "^8.4.38",
+    "rimraf": "^5.0.8",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "pnpm@8.9.0",
+  "engines": {
+    "node": ">=18"
   }
 }

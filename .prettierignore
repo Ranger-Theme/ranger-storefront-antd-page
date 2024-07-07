@@ -1,0 +1,7 @@
+*.yaml
+*.md
+*.html
+dist
+package-lock.json
+node_modules
+public
