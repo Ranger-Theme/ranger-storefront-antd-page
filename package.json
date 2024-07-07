@@ -14,7 +14,7 @@
     "lint": "next lint",
     "clean": "rimraf .next node_modules",
     "preinstall": "npx only-allow pnpm",
-    "husky:prepare": "husky install"
+    "husky:prepare": "husky"
   },
   "dependencies": {
     "next": "^14.2.4",
@@ -26,14 +26,14 @@
     "@ranger-theme/branchlint-config": "^0.1.0",
     "@ranger-theme/commitizen-config": "^0.1.0",
     "@ranger-theme/commitlint-config": "^0.4.0",
-    "@ranger-theme/eslint-config": "^0.2.0",
-    "@ranger-theme/prettier-config": "^0.1.0",
+    "@ranger-theme/eslint-config": "^0.3.0",
+    "@ranger-theme/prettier-config": "^0.2.0",
     "@ranger-theme/stylelint-config": "^0.2.1",
     "@ranger-theme/ts-config": "^0.1.0",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
-    "eslint": "^8.56.0",
+    "eslint": "^8.2.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
     "postcss": "^8.4.38",
