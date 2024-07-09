@@ -4,7 +4,7 @@ const Resolver = () => {
   return (
     <div>
       <p>Resolver Page</p>
-      <Link href="/">Home Page</Link>
+      <Link href="/blog/latest-news">Blog</Link>
     </div>
   )
 }

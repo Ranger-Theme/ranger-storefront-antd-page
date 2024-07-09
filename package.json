@@ -17,7 +17,10 @@
     "husky:prepare": "husky"
   },
   "dependencies": {
-    "@ranger-theme/nextjs-config": "^0.2.0",
+    "@ant-design/cssinjs": "^1.21.0",
+    "@ranger-theme/nextjs-config": "^0.3.0",
+    "@ranger-theme/pwa-config": "^0.1.0",
+    "antd": "^5.19.1",
     "next": "^14.2.4",
     "only-allow": "^1.2.1",
     "react": "^18.2.0",
