@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Button } from 'antd'
 
 const Home = () => {
   console.info('home is render...')
@@ -17,7 +18,10 @@ const Home = () => {
         <div>
           <Image src="/next.svg" alt="Next.js Logo" width={180} height={37} priority />
         </div>
-        <Link href="/women/close.html">Close</Link>
+        <div>
+          <Link href="/women/close.html">Close</Link>
+        </div>
+        <Button type="primary">Button</Button>
       </main>
     </>
   )

@@ -1,25 +1,51 @@
 import Script from 'next/script'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import {
+  createCache,
+  extractStyle,
+  legacyLogicalPropertiesTransformer,
+  StyleProvider
+} from '@ant-design/cssinjs'
 import type { DocumentContext, DocumentProps, DocumentInitialProps } from 'next/document'
 
 class NextDocument extends Document<DocumentProps & { deviceType: string }> {
   static async getInitialProps(
     ctx: DocumentContext
   ): Promise<DocumentInitialProps & { deviceType: string }> {
+    const cache = createCache()
     const originalRenderPage = ctx.renderPage
 
     // Run the React rendering logic synchronously
     ctx.renderPage = () =>
       originalRenderPage({
-        enhanceApp: (App) => App,
+        enhanceApp: (App) => (props) => (
+          <StyleProvider
+            cache={cache}
+            ssrInline
+            hashPriority="high"
+            transformers={[legacyLogicalPropertiesTransformer]}
+          >
+            <App {...props} />
+          </StyleProvider>
+        ),
         enhanceComponent: (Component) => Component
       })
 
     // Run the parent `getInitialProps`, it now includes the custom `renderPage`
     const initialProps = await Document.getInitialProps(ctx)
     const deviceType = (ctx.req?.headers['x-device-type'] as string) ?? 'PC'
+    const style = extractStyle(cache, true)
 
-    return { ...initialProps, deviceType }
+    return {
+      ...initialProps,
+      deviceType,
+      styles: (
+        <>
+          {initialProps.styles}
+          <style id="__jss_server_side__" dangerouslySetInnerHTML={{ __html: style }} />
+        </>
+      )
+    }
   }
 
   render() {
