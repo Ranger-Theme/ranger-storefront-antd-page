@@ -1,5 +1,5 @@
-const commitizenConfig = require("@ranger-theme/commitizen-config");
+const commitizenConfig = require('@ranger-theme/commitizen-config')
 
 module.exports = {
-  ...commitizenConfig,
-};
+  ...commitizenConfig
+}

@@ -1,5 +1,5 @@
-const commitlintConfig = require("@ranger-theme/commitlint-config");
+const commitlintConfig = require('@ranger-theme/commitlint-config')
 
 module.exports = {
-  ...commitlintConfig,
-};
+  ...commitlintConfig
+}
