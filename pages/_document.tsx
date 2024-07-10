@@ -4,6 +4,7 @@ import {
   createCache,
   extractStyle,
   legacyLogicalPropertiesTransformer,
+  px2remTransformer,
   StyleProvider
 } from '@ant-design/cssinjs'
 import type { DocumentContext, DocumentProps, DocumentInitialProps } from 'next/document'
@@ -14,6 +15,7 @@ class NextDocument extends Document<DocumentProps & { deviceType: string }> {
   ): Promise<DocumentInitialProps & { deviceType: string }> {
     const cache = createCache()
     const originalRenderPage = ctx.renderPage
+    const deviceType = (ctx.req?.headers['x-device-type'] as string) ?? 'PC'
 
     // Run the React rendering logic synchronously
     ctx.renderPage = () =>
@@ -23,7 +25,14 @@ class NextDocument extends Document<DocumentProps & { deviceType: string }> {
             cache={cache}
             ssrInline
             hashPriority="high"
-            transformers={[legacyLogicalPropertiesTransformer]}
+            transformers={[
+              legacyLogicalPropertiesTransformer,
+              px2remTransformer({
+                rootValue: deviceType === 'H5' ? 50 : 100,
+                precision: 5,
+                mediaQuery: true
+              })
+            ]}
           >
             <App {...props} />
           </StyleProvider>
@@ -33,7 +42,6 @@ class NextDocument extends Document<DocumentProps & { deviceType: string }> {
 
     // Run the parent `getInitialProps`, it now includes the custom `renderPage`
     const initialProps = await Document.getInitialProps(ctx)
-    const deviceType = (ctx.req?.headers['x-device-type'] as string) ?? 'PC'
     const style = extractStyle(cache, true)
 
     return {
@@ -69,7 +77,7 @@ class NextDocument extends Document<DocumentProps & { deviceType: string }> {
                     if (e <= 1200) {
                       n.style.fontSize = e / 7.5 + 'px';
                     } else {
-                      n.style.fontSize = e / 19.2 + 'px'
+                      n.style.fontSize = e / 19.2 + 'px';
                     }
                   };
                 if (t.readyState === 'loading') d();

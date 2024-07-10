@@ -1,13 +1,18 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 import { ConfigProvider } from 'antd'
+import { events } from '@ranger-theme/utils'
 import type { AppProps } from 'next/app'
 import 'antd/dist/reset.css'
 
 import { theme } from '@/config/theme.config'
 
 const App = ({ Component, pageProps }: AppProps) => {
-  console.info('app is bootstrap...')
+  useEffect(() => {
+    window.events = window.events || events
+  }, [])
 
+  console.info('app is bootstrap...')
   return (
     <>
       <Head>
