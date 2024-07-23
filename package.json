@@ -21,6 +21,7 @@
     "@apollo/client": "^3.10.8",
     "@ranger-theme/nextjs-config": "^0.3.0",
     "@ranger-theme/pwa-config": "^0.1.0",
+    "@ranger-theme/tailwind-config": "^0.1.0",
     "@ranger-theme/utils": "^0.1.0",
     "antd": "^5.19.1",
     "http-proxy-middleware": "^3.0.0",

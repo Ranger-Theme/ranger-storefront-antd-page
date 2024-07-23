@@ -14,7 +14,7 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <div>
         <div>
           <Image src="/next.svg" alt="Next.js Logo" width={180} height={37} priority />
         </div>
@@ -22,7 +22,7 @@ const Home = () => {
           <Link href="/women/close.html">Close</Link>
         </div>
         <Button type="primary">Button</Button>
-      </main>
+      </div>
     </>
   )
 }

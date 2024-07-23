@@ -1,4 +1,4 @@
-import Script from 'next/script'
+// import Script from 'next/script'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import {
   createCache,
@@ -50,12 +50,13 @@ class NextDocument extends Document<DocumentProps & { deviceType: string }> {
 
   render() {
     return (
-      <Html lang="en" style={{ fontSize: this.props.deviceType === 'H5' ? '50px' : '100px' }}>
+      // <Html lang="en" style={{ fontSize: this.props.deviceType === 'H5' ? '50px' : '100px' }}>
+      <Html>
         <Head>
           <meta name="robots" content="INDEX,FOLLOW" />
         </Head>
-        <body>
-          <Script
+        <body className="bg-body font-sans text-base text-colorDefault">
+          {/* <Script
             id="__html_font_size__"
             strategy="beforeInteractive"
             dangerouslySetInnerHTML={{
@@ -82,7 +83,7 @@ class NextDocument extends Document<DocumentProps & { deviceType: string }> {
               })(window);
             `
             }}
-          />
+          /> */}
           <Main />
           <NextScript />
         </body>

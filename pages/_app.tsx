@@ -5,6 +5,8 @@ import { events } from '@ranger-theme/utils'
 import type { AppProps } from 'next/app'
 import 'antd/dist/reset.css'
 
+import '@/styles/global.css'
+
 import { theme } from '@/config/theme.config'
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -22,7 +24,15 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <ConfigProvider prefixCls={theme.prefix} iconPrefixCls={theme.prefix} theme={theme.variables}>
-        <Component {...pageProps} />
+        <main className="main-root-c9- bg-white relative text-colorDefault z-foreground">
+          <div className="header-switchersContainer-oIh bg-gray-100 hidden px-8 w-full sm_block">
+            <div className="header-switchers-K3o auto-cols-max grid grid-flow-col justify-end max-w-site mx-auto relative w-full z-menu">
+              <div className="storeSwitcher-root-qtK grid items-center justify-items-start max-w-site mx-auto my-0 px-xs py-2xs relative sm_justify-items-end" />
+              <div className="currencySwitcher-root-oE0 grid items-center justify-items-start max-w-site mx-auto my-0 p-0 relative sm_justify-items-end" />
+            </div>
+          </div>
+          <Component {...pageProps} />
+        </main>
       </ConfigProvider>
     </>
   )
