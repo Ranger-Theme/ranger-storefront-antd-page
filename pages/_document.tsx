@@ -4,7 +4,6 @@ import {
   createCache,
   extractStyle,
   legacyLogicalPropertiesTransformer,
-  px2remTransformer,
   StyleProvider
 } from '@ant-design/cssinjs'
 import type { DocumentContext, DocumentProps, DocumentInitialProps } from 'next/document'
@@ -25,14 +24,7 @@ class NextDocument extends Document<DocumentProps & { deviceType: string }> {
             cache={cache}
             ssrInline
             hashPriority="high"
-            transformers={[
-              legacyLogicalPropertiesTransformer,
-              px2remTransformer({
-                rootValue: deviceType === 'H5' ? 50 : 100,
-                precision: 5,
-                mediaQuery: true
-              })
-            ]}
+            transformers={[legacyLogicalPropertiesTransformer]}
           >
             <App {...props} />
           </StyleProvider>

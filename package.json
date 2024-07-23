@@ -23,6 +23,7 @@
     "@ranger-theme/pwa-config": "^0.1.0",
     "@ranger-theme/utils": "^0.1.0",
     "antd": "^5.19.1",
+    "http-proxy-middleware": "^3.0.0",
     "next": "^14.2.4",
     "only-allow": "^1.2.1",
     "react": "^18.2.0",
