@@ -32,6 +32,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             </div>
           </div>
           <Component {...pageProps} />
+          <div className="border-t-2 border-solid border-light gap-y-16 grid leading-normal max-w-site min-h-[15rem] mx-auto my-0 pt-16 text-sm text-subtle w-full" />
         </main>
       </ConfigProvider>
     </>
