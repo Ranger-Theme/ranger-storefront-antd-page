@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from 'antd'
 
@@ -15,9 +14,6 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <div>
-          <Image src="/next.svg" alt="Next.js Logo" width={180} height={37} priority />
-        </div>
         <div>
           <Link href="/women/close.html">Close</Link>
         </div>

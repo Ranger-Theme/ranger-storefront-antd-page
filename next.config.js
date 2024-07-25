@@ -11,10 +11,13 @@ module.exports = nextConfig({
   pkg,
   dirname: process.cwd(),
   timestamp,
-  transpilePackages: [],
+  transpilePackages: ['@ranger-theme/core'],
   compiler: {
     reactRemoveProperties: isProd,
     removeConsole: false
   },
+  // experimental: {
+  //   esmExternals: 'loose'
+  // },
   plugins: [...pwaConfig({ timestamp })]
 })

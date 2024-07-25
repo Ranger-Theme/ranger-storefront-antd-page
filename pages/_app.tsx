@@ -1,20 +1,18 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
 import { ConfigProvider } from 'antd'
-import { events } from '@ranger-theme/utils'
+import { withApollo, withRedux } from '@ranger-theme/core'
+// import {} from '@ranger-theme/ui'
 import type { AppProps } from 'next/app'
 import 'antd/dist/reset.css'
-
 import '@/styles/global.css'
 
 import { theme } from '@/config/theme.config'
+import { rootReducer } from '@/store'
+import AppLayout from '@/components/AppLayout'
 
 const App = ({ Component, pageProps }: AppProps) => {
-  useEffect(() => {
-    window.events = window.events || events
-  }, [])
-
   console.info('app is bootstrap...')
+
   return (
     <>
       <Head>
@@ -24,19 +22,12 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <ConfigProvider prefixCls={theme.prefix} iconPrefixCls={theme.prefix} theme={theme.variables}>
-        <main className="main-root-c9- bg-white relative text-colorDefault z-foreground">
-          <div className="header-switchersContainer-oIh bg-gray-100 hidden px-8 w-full sm_block">
-            <div className="header-switchers-K3o auto-cols-max grid grid-flow-col justify-end max-w-site mx-auto relative w-full z-menu">
-              <div className="storeSwitcher-root-qtK grid items-center justify-items-start max-w-site mx-auto my-0 px-xs py-2xs relative sm_justify-items-end" />
-              <div className="currencySwitcher-root-oE0 grid items-center justify-items-start max-w-site mx-auto my-0 p-0 relative sm_justify-items-end" />
-            </div>
-          </div>
+        <AppLayout>
           <Component {...pageProps} />
-          <div className="border-t-2 border-solid border-light gap-y-16 grid leading-normal max-w-site min-h-[15rem] mx-auto my-0 pt-16 text-sm text-subtle w-full" />
-        </main>
+        </AppLayout>
       </ConfigProvider>
     </>
   )
 }
 
-export default App
+export default withApollo(withRedux(App, rootReducer))
