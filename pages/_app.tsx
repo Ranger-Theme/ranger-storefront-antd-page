@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { ConfigProvider } from 'antd'
 import { withApollo, withRedux } from '@ranger-theme/core'
-// import {} from '@ranger-theme/ui'
 import type { AppProps } from 'next/app'
 import 'antd/dist/reset.css'
 import '@/styles/global.css'

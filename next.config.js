@@ -16,8 +16,5 @@ module.exports = nextConfig({
     reactRemoveProperties: isProd,
     removeConsole: false
   },
-  // experimental: {
-  //   esmExternals: 'loose'
-  // },
   plugins: [...pwaConfig({ timestamp })]
 })
