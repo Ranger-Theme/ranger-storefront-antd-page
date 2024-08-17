@@ -14,7 +14,12 @@ module.exports = nextConfig({
   transpilePackages: ['@ranger-theme/core'],
   compiler: {
     reactRemoveProperties: isProd,
-    removeConsole: false
+    removeConsole: false,
+    emotion: {
+      sourceMap: !isProd,
+      autoLabel: 'dev-only',
+      labelFormat: '[local]'
+    }
   },
   plugins: [...pwaConfig({ timestamp })]
 })

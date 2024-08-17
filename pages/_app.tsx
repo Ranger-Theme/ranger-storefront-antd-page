@@ -4,6 +4,8 @@ import { ApolloProvider } from '@apollo/client'
 import { Provider as ReduxProvider } from 'react-redux'
 import { withApollo, withRedux } from '@ranger-theme/core'
 import { isEmpty } from 'lodash-es'
+import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
 import type { AppProps as NextAppProps } from 'next/app'
 import 'antd/dist/reset.css'
 import '@/styles/global.css'
@@ -21,6 +23,8 @@ interface AppProps extends NextAppProps {
   reduxStore?: any
 }
 
+const cache = createCache({ key: 'css', prepend: false })
+
 const App = ({ Component, pageProps, apolloClient, reduxStore }: AppProps) => {
   console.info('app is bootstrap...')
 
@@ -34,15 +38,17 @@ const App = ({ Component, pageProps, apolloClient, reduxStore }: AppProps) => {
       </Head>
       <ApolloProvider client={apolloClient}>
         <ReduxProvider store={reduxStore}>
-          <ConfigProvider
-            prefixCls={theme.prefix}
-            iconPrefixCls={theme.prefix}
-            theme={theme.variables}
-          >
-            <AppLayout>
-              <Component {...pageProps} />
-            </AppLayout>
-          </ConfigProvider>
+          <CacheProvider value={cache}>
+            <ConfigProvider
+              prefixCls={theme.prefix}
+              iconPrefixCls={theme.prefix}
+              theme={theme.variables}
+            >
+              <AppLayout>
+                <Component {...pageProps} />
+              </AppLayout>
+            </ConfigProvider>
+          </CacheProvider>
         </ReduxProvider>
       </ApolloProvider>
     </>
