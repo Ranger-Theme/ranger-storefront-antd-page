@@ -5,45 +5,50 @@ import {
   legacyLogicalPropertiesTransformer,
   StyleProvider
 } from '@ant-design/cssinjs'
+import { ServerStyleSheet } from 'styled-components'
 import type { DocumentContext, DocumentProps, DocumentInitialProps } from 'next/document'
 
 class NextDocument extends Document<DocumentProps & { deviceType: string }> {
   static async getInitialProps(
     ctx: DocumentContext
   ): Promise<DocumentInitialProps & { deviceType: string }> {
-    const cache = createCache()
     const originalRenderPage = ctx.renderPage
+    const cache = createCache()
+    const sheet = new ServerStyleSheet()
     const deviceType = (ctx.req?.headers['x-device-type'] as string) ?? 'PC'
 
-    // Run the React rendering logic synchronously
-    ctx.renderPage = () =>
-      originalRenderPage({
-        enhanceApp: (App) => (props) => (
-          <StyleProvider
-            cache={cache}
-            ssrInline
-            hashPriority="high"
-            transformers={[legacyLogicalPropertiesTransformer]}
-          >
-            <App {...props} />
-          </StyleProvider>
-        ),
-        enhanceComponent: (Component) => Component
-      })
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App: any) => (props) =>
+            sheet.collectStyles(
+              <StyleProvider
+                cache={cache}
+                ssrInline
+                hashPriority="high"
+                transformers={[legacyLogicalPropertiesTransformer]}
+              >
+                <App {...props} />
+              </StyleProvider>
+            )
+        })
 
-    // Run the parent `getInitialProps`, it now includes the custom `renderPage`
-    const initialProps = await Document.getInitialProps(ctx)
-    const style = extractStyle(cache, true)
+      const initialProps = await Document.getInitialProps(ctx)
+      const style = extractStyle(cache, true)
 
-    return {
-      ...initialProps,
-      deviceType,
-      styles: (
-        <>
-          {initialProps.styles}
-          <style id="__jss_server_side__" dangerouslySetInnerHTML={{ __html: style }} />
-        </>
-      )
+      return {
+        ...initialProps,
+        deviceType,
+        styles: (
+          <>
+            <style id="__jss_server_side__" dangerouslySetInnerHTML={{ __html: style }} />
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        )
+      }
+    } finally {
+      sheet.seal()
     }
   }
 

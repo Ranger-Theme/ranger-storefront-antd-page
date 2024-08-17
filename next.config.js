@@ -15,10 +15,11 @@ module.exports = nextConfig({
   compiler: {
     reactRemoveProperties: isProd,
     removeConsole: false,
-    emotion: {
-      sourceMap: !isProd,
-      autoLabel: 'dev-only',
-      labelFormat: '[local]'
+    styledComponents: {
+      displayName: !isProd,
+      fileName: false,
+      ssr: true,
+      minify: isProd
     }
   },
   plugins: [...pwaConfig({ timestamp })]
